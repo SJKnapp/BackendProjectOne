@@ -24,7 +24,7 @@ public class ToDoListServiceDb implements ToDoListService {
 
 	@Override
 	public ToDoList getTask(int id) {
-		return repo.getById(id);
+		return repo.findById(id).get();
 	}
 
 	@Override
