@@ -1,6 +1,7 @@
 package com.qa.data;
 
-import java.time.LocalTime;
+import java.sql.Date;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,11 +14,49 @@ public class ToDoList {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private LocalTime dueDate;
+	private Date dueDate;
 	private String name;
 	private String description;
 	private int priority;
 	private int timeEstimateMinutes;
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(description, dueDate, id, name, priority, timeEstimateMinutes);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ToDoList other = (ToDoList) obj;
+		return Objects.equals(description, other.description) && Objects.equals(dueDate, other.dueDate)
+				&& id == other.id && Objects.equals(name, other.name) && priority == other.priority
+				&& timeEstimateMinutes == other.timeEstimateMinutes;
+	}
+
+	public ToDoList(Date dueDate, String name, String description, int priority, int timeEstimateMinutes) {
+		super();
+		this.dueDate = dueDate;
+		this.name = name;
+		this.description = description;
+		this.priority = priority;
+		this.timeEstimateMinutes = timeEstimateMinutes;
+	}
+
+	public ToDoList(int id, Date dueDate, String name, String description, int priority, int timeEstimateMinutes) {
+		super();
+		this.id = id;
+		this.dueDate = dueDate;
+		this.name = name;
+		this.description = description;
+		this.priority = priority;
+		this.timeEstimateMinutes = timeEstimateMinutes;
+	}
 
 	public int getId() {
 		return id;
@@ -59,11 +98,11 @@ public class ToDoList {
 		this.timeEstimateMinutes = timeEstimateMinutes;
 	}
 
-	public LocalTime getDueDate() {
+	public Date getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(LocalTime dueDate) {
+	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
 }
