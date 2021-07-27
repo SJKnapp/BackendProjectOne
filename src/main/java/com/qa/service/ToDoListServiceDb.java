@@ -37,14 +37,14 @@ public class ToDoListServiceDb implements ToDoListService {
 
 	@Override
 	public ToDoList CreateTask(ToDoList toDoList) {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.save(toDoList);
 	}
 
 	@Override
 	public ToDoList PutTask(int id, ToDoList toDoList) {
-		// TODO Auto-generated method stub
-		return null;
+		ToDoList object = getTask(id);
+		object = toDoList;
+		return getTask(id);
 	}
 
 }
