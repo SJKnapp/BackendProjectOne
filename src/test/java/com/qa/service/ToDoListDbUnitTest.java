@@ -56,8 +56,14 @@ public class ToDoListDbUnitTest {
 	@Test
 	void testDeleteTask() {
 		int id = 1;
+		long millis = System.currentTimeMillis();
+		java.sql.Date date = new java.sql.Date(millis);
 
-		assertThat(service.getTask(id)).isEqualTo(null);
+		ToDoList expectedToDoList = new ToDoList(id, date, "task", "long task", 4, 100);
+
+		Mockito.when(repo.getById(id)).thenReturn(expectedToDoList);
+
+		assertThat(service.getTask(id)).isEqualTo(expectedToDoList);
 	}
 
 	@Test

@@ -24,14 +24,15 @@ public class ToDoListServiceDb implements ToDoListService {
 
 	@Override
 	public ToDoList getTask(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.getById(id);
 	}
 
 	@Override
 	public ToDoList DeleteTask(int id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		ToDoList object = getTask(id);
+		repo.deleteById(id);
+		return object;
 	}
 
 	@Override
