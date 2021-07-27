@@ -1,11 +1,11 @@
 package com.qa.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.qa.data.ToDoList;
 
 public interface ToDoListService {
-	public ArrayList<ToDoList> getAllTask();
+	public List<ToDoList> getAllTask();
 
 	public ToDoList getTask(int id);
 

@@ -1,18 +1,25 @@
 package com.qa.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.qa.data.ToDoList;
+import com.qa.data.repo.ToDoListRepo;
 
 @Service
 public class ToDoListServiceDb implements ToDoListService {
 
+	ToDoListRepo repo;
+
+	public ToDoListServiceDb(ToDoListRepo repo) {
+		super();
+		this.repo = repo;
+	}
+
 	@Override
-	public ArrayList<ToDoList> getAllTask() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ToDoList> getAllTask() {
+		return repo.findAll();
 	}
 
 	@Override

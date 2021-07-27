@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.qa.data.ToDoList;
@@ -21,7 +22,7 @@ public class ToDoListDbUnitTest {
 	@Autowired
 	private ToDoListServiceDb service;
 
-	@Autowired
+	@MockBean
 	private ToDoListRepo repo;
 
 	@Test
@@ -34,7 +35,7 @@ public class ToDoListDbUnitTest {
 		expected.add(new ToDoList(1, date, "task", "long task", 4, 100));
 		expected.add(new ToDoList(2, date, "long task", "long task", 4, 100));
 
-		Mockito.when(repo.findAll()).thenReturn(expected);
+		Mockito.when(this.repo.findAll()).thenReturn(expected);
 
 		assertThat(service.getAllTask()).isEqualTo(expected);
 	}
