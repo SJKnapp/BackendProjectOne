@@ -39,6 +39,10 @@ public class ToDoList {
 				&& timeEstimateMinutes == other.timeEstimateMinutes;
 	}
 
+	public ToDoList() {
+		super();
+	}
+
 	public ToDoList(Date dueDate, String name, String description, int priority, int timeEstimateMinutes) {
 		super();
 		this.dueDate = dueDate;
