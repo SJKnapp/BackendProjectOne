@@ -1,6 +1,7 @@
 package com.qa.rest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
@@ -47,8 +49,14 @@ public class ToDoListServiceControllerIntergrationTest {
 	}
 
 	@Test
-	void testCreateTask() {
+	void testCreateTask() throws Exception {
+		ToDoList request = new ToDoList(Date.valueOf("2021-07-12"), "one", "a short task", 1, 100);
+		ToDoList expected = new ToDoList(3, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100);
 
+		ResultMatcher body = content().json(this.mapper.writeValueAsString(expected));
+
+		this.mockMvc.perform(post("/create").contentType(MediaType.APPLICATION_JSON)
+				.content(this.mapper.writeValueAsString(request))).andExpect(status().isOk()).andExpect(body);
 	}
 
 	@Test
