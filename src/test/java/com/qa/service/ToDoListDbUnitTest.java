@@ -2,6 +2,9 @@ package com.qa.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,21 @@ public class ToDoListDbUnitTest {
 
 	@Autowired
 	private ToDoListRepo repo;
+
+	@Test
+	void testGetAllTasks() {
+		List<ToDoList> expected = new ArrayList<ToDoList>();
+
+		long millis = System.currentTimeMillis();
+		java.sql.Date date = new java.sql.Date(millis);
+
+		expected.add(new ToDoList(1, date, "task", "long task", 4, 100));
+		expected.add(new ToDoList(2, date, "long task", "long task", 4, 100));
+
+		Mockito.when(repo.findAll()).thenReturn(expected);
+
+		assertThat(service.getAllTask()).isEqualTo(expected);
+	}
 
 	@Test
 	void testGetTask() {
