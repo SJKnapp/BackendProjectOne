@@ -1,8 +1,7 @@
 package com.qa.data;
 
-import java.util.Objects;
+import java.time.LocalTime;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,43 +13,18 @@ public class ToDoList {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
-	@Column(name = "fullName", unique = true)
+	private LocalTime dueDate;
 	private String name;
-	private int age;
+	private String description;
+	private int priority;
+	private int timeEstimateMinutes;
 
-	public ToDoList() {
-		// TODO Auto-generated constructor stub
+	public int getId() {
+		return id;
 	}
 
-	public ToDoList(String name, int age) {
-		super();
-		this.name = name;
-		this.age = age;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(age, id, name);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ToDoList other = (ToDoList) obj;
-		return age == other.age && id == other.id && Objects.equals(name, other.name);
-	}
-
-	public ToDoList(int id, String name, int age) {
-		super();
-		this.setId(id);
-		this.name = name;
-		this.age = age;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -61,19 +35,35 @@ public class ToDoList {
 		this.name = name;
 	}
 
-	public int getAge() {
-		return age;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public int getId() {
-		return id;
+	public int getPriority() {
+		return priority;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+
+	public int getTimeEstimateMinutes() {
+		return timeEstimateMinutes;
+	}
+
+	public void setTimeEstimateMinutes(int timeEstimateMinutes) {
+		this.timeEstimateMinutes = timeEstimateMinutes;
+	}
+
+	public LocalTime getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(LocalTime dueDate) {
+		this.dueDate = dueDate;
 	}
 }
