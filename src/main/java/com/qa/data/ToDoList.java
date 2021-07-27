@@ -1,6 +1,6 @@
 package com.qa.data;
 
-import java.time.LocalTime;
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,11 +13,30 @@ public class ToDoList {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private LocalTime dueDate;
+	private Date dueDate;
 	private String name;
 	private String description;
 	private int priority;
 	private int timeEstimateMinutes;
+
+	public ToDoList(Date dueDate, String name, String description, int priority, int timeEstimateMinutes) {
+		super();
+		this.dueDate = dueDate;
+		this.name = name;
+		this.description = description;
+		this.priority = priority;
+		this.timeEstimateMinutes = timeEstimateMinutes;
+	}
+
+	public ToDoList(int id, Date dueDate, String name, String description, int priority, int timeEstimateMinutes) {
+		super();
+		this.id = id;
+		this.dueDate = dueDate;
+		this.name = name;
+		this.description = description;
+		this.priority = priority;
+		this.timeEstimateMinutes = timeEstimateMinutes;
+	}
 
 	public int getId() {
 		return id;
@@ -59,11 +78,11 @@ public class ToDoList {
 		this.timeEstimateMinutes = timeEstimateMinutes;
 	}
 
-	public LocalTime getDueDate() {
+	public Date getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(LocalTime dueDate) {
+	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
 }

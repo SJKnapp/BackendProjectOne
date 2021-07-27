@@ -11,7 +11,7 @@ public interface ToDoListService {
 
 	public ToDoList DeleteTask();
 
-	public ToDoList CreateTask();
+	public ToDoList CreateTask(ToDoList toDoList);
 
 	public ToDoList PutDuck();
 }
