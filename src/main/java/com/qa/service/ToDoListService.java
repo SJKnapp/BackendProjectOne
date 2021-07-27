@@ -7,11 +7,11 @@ import com.qa.data.ToDoList;
 public interface ToDoListService {
 	public ArrayList<ToDoList> getAllTask();
 
-	public ToDoList getTask();
+	public ToDoList getTask(int id);
 
-	public ToDoList DeleteTask();
+	public ToDoList DeleteTask(int id);
 
 	public ToDoList CreateTask(ToDoList toDoList);
 
-	public ToDoList PutDuck();
+	public ToDoList PutTask(int id, ToDoList toDoList);
 }

@@ -16,13 +16,13 @@ public class ToDoListServiceDb implements ToDoListService {
 	}
 
 	@Override
-	public ToDoList getTask() {
+	public ToDoList getTask(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ToDoList DeleteTask() {
+	public ToDoList DeleteTask(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -34,7 +34,7 @@ public class ToDoListServiceDb implements ToDoListService {
 	}
 
 	@Override
-	public ToDoList PutDuck() {
+	public ToDoList PutTask(int id, ToDoList toDoList) {
 		// TODO Auto-generated method stub
 		return null;
 	}
