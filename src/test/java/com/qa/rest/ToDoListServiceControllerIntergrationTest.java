@@ -3,6 +3,7 @@ package com.qa.rest;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -62,15 +63,22 @@ public class ToDoListServiceControllerIntergrationTest {
 
 	@Test
 	void testGetTask() throws Exception {
-		ToDoList toDoLists = new ToDoList(1, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100);
-		ResultMatcher response = content().json(this.mapper.writeValueAsString(toDoLists));
+		ToDoList toDoList = new ToDoList(1, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100);
+		ResultMatcher response = content().json(this.mapper.writeValueAsString(toDoList));
 
 		this.mockMvc.perform(get("/task/1/get")).andExpect(status().isOk()).andExpect(response);
 	}
 
 	@Test
 	void testUpdateTask() throws Exception {
+		ToDoList request = new ToDoList(Date.valueOf("2022-6-05"), "three", "a very long task", 15, 1000);
+		ToDoList toDoList = new ToDoList(1, Date.valueOf("2022-6-05"), "three", "a very long task", 15, 1000);
+		ResultMatcher response = content().json(this.mapper.writeValueAsString(toDoList));
 
+		this.mockMvc
+				.perform(put("/task/1/update").contentType(MediaType.APPLICATION_JSON)
+						.content(this.mapper.writeValueAsString(request)))
+				.andExpect(status().isOk()).andExpect(response);
 	}
 
 	@Test
