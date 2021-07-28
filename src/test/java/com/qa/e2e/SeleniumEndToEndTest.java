@@ -3,6 +3,7 @@ package com.qa.e2e;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -49,7 +50,17 @@ public class SeleniumEndToEndTest {
 	void testers() {
 		driver.get("http://localhost:" + port + "/");
 		WebElement wait = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
-		List<WebElement> pageElements = driver.findElements(By.id("renderedTasks"));
+		WebElement w = driver.findElement(By.cssSelector("#renderedTasks > div:nth-child(1) > input:nth-child(1)"));
+		// wait.findElements(By.cssSelector("div:nthchild"));
+		w.sendKeys("aaaaa");
+		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
+		WebElement r = pageElements.get(0).findElement(By.cssSelector("input:nth-child(1)"));
+		r.clear();
 		System.out.println(pageElements);
+	}
+
+	@AfterEach
+	void tearDown() {
+		this.driver.close();
 	}
 }
