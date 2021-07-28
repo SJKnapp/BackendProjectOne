@@ -48,6 +48,7 @@ public class ToDoListServiceDb implements ToDoListService {
 		object.setDescription(toDoList.getDescription());
 		object.setPriority(toDoList.getPriority());
 		object.setTimeEstimateMinutes(toDoList.getTimeEstimateMinutes());
+		ToDoList found = this.repo.save(object);
 		return getTask(id);
 	}
 
