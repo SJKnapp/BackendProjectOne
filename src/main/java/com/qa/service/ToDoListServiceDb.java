@@ -43,7 +43,11 @@ public class ToDoListServiceDb implements ToDoListService {
 	@Override
 	public ToDoList PutTask(int id, ToDoList toDoList) {
 		ToDoList object = getTask(id);
-		object = toDoList;
+		object.setDueDate(toDoList.getDueDate());
+		object.setName(toDoList.getName());
+		object.setDescription(toDoList.getDescription());
+		object.setPriority(toDoList.getPriority());
+		object.setTimeEstimateMinutes(toDoList.getTimeEstimateMinutes());
 		return getTask(id);
 	}
 
