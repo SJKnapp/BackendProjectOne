@@ -100,5 +100,7 @@ boolean and id was the data's id in the database:
 At time of writing all tests passed on project passed
 
 ![image of test results](https://github.com/SJKnapp/ProjectOneSupplementary/blob/main/ProjectOneTestResults.PNG)
+
+Tests cover the frontend with selenium the controller with mockmvc and the service with mockito
  
  
