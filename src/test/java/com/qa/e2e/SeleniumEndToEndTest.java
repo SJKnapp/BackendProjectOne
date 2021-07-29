@@ -62,6 +62,7 @@ public class SeleniumEndToEndTest {
 		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
 		assertEquals(3, pageElements.size());
 		List<WebElement> inputValues = pageElements.get(0).findElements(By.cssSelector("input"));
+		assertEquals(5, inputValues.size());
 		assertEquals("one", inputValues.get(0).getAttribute("value"));
 		assertEquals("a short task", inputValues.get(1).getAttribute("value"));
 		assertEquals("1", inputValues.get(2).getAttribute("value"));
@@ -71,6 +72,49 @@ public class SeleniumEndToEndTest {
 		List<WebElement> buttonText = pageElements.get(0).findElements(By.cssSelector("button"));
 		assertEquals("save", buttonText.get(0).getText());
 		assertEquals("delete", buttonText.get(1).getText());
+
+	}
+
+	@Test
+	void TestCreateEntry() {
+		driver.get("http://localhost:" + port + "/");
+		WebElement wait = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
+		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
+
+		List<WebElement> inputValues = pageElements.get(2).findElements(By.cssSelector("input"));
+
+		String TaskName = "new task";
+		inputValues.get(0).clear();
+		inputValues.get(0).sendKeys(TaskName);
+
+		String TaskDescription = "a automaticly created task";
+		inputValues.get(1).clear();
+		inputValues.get(1).sendKeys(TaskDescription);
+
+		String TaskPrioity = "1";
+		inputValues.get(2).clear();
+		inputValues.get(2).sendKeys(TaskPrioity);
+
+		String TaskLength = "199";
+		inputValues.get(3).clear();
+		inputValues.get(3).sendKeys(TaskLength);
+
+		String TaskDate = "2021-09-01";
+		inputValues.get(4).clear();
+		inputValues.get(4).sendKeys(TaskDate);
+
+		List<WebElement> buttons = pageElements.get(2).findElements(By.cssSelector("button"));
+		assertEquals("save", buttons.get(0).getText());
+		buttons.get(0).click();
+
+		pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
+		List<WebElement> storedValues = pageElements.get(2).findElements(By.cssSelector("input"));
+		assertEquals(5, storedValues.size());
+		assertEquals(TaskName, storedValues.get(0).getAttribute("value"));
+		assertEquals(TaskDescription, storedValues.get(1).getAttribute("value"));
+		assertEquals(TaskPrioity, storedValues.get(2).getAttribute("value"));
+		assertEquals(TaskLength, storedValues.get(3).getAttribute("value"));
+		assertEquals(TaskDate, storedValues.get(4).getAttribute("value"));
 	}
 
 	@AfterEach
