@@ -21,12 +21,12 @@ During this project several different technoligoes and resources where used:
 	<li>MockMVC</li>
 </ul>
 
-To keep track of task a jira board was used which can be found here
+To keep track of task a Jira board was used which can be found here
 [https://sjknapp.atlassian.net/jira/software/projects/TP/boards/3](https://sjknapp.atlassian.net/jira/software/projects/TP/boards/3)
 So stories could be placed in order of importance and estimates of story points could be placed against them so that it was easy to 
 see the state of the project.
 
-Another tool that was used was postman which was used to proform manual tests on the endpoints to ensure that they where returning 
+Another tool that was used was postman which was used to perform manual tests on the endpoints to ensure that they where returning 
 what was expected. The postman exported collection can be found in 
 [https://github.com/SJKnapp/ProjectOneSupplementary](https://github.com/SJKnapp/ProjectOneSupplementary).
 
@@ -38,10 +38,10 @@ The front end is a to do list with the project repository can be found at
 <br />
 The front has been programed in html, javascript and css. As well as making use of bootstrap 
 in order to place the colums in the table.
-The front end colour scheme is dependent on a tasks status with the aviable status being:
+The front end colour scheme is dependent on a tasks status with the available status being:
 <ul>
 	<li>No due date not marked done</li>
-	<li>time remaing not marked done</li>
+	<li>time remaining not marked done</li>
 	<li>overdue not marked done</li>
 	<li>complete</li>
 </ul>
@@ -50,7 +50,7 @@ The front end colour scheme is dependent on a tasks status with the aviable stat
 
 where the first row colour scheme is overdue not marked done
 <br/>the second row has been marked as done
-<br/>the third row is time remaing not marked done
+<br/>the third row is time remaining not marked done
 <br/>the forth row is ready for data entry where clicking 
 the save button will create an entry with the data in that 
 row with the colour scheme of No due date not marked done
@@ -98,4 +98,8 @@ boolean and id was the data's id in the database:
 </ul>
 
 <h2>4. Testing</h2>
-This 
+
+At time of writing all tests passed on project passed
+![image of test results](https://github.com/SJKnapp/ProjectOneSupplementary/blob/main/ProjectOneTestResults.PNG)
+ 
+ 
