@@ -13,6 +13,7 @@ During this project several different technoligoes and resources where used:
 	<li>Bootstrap</li>
 	<li>Git</li>
 	<li>Html</li>
+	<li>Spring</li>
 	<h4>For Testing</h4>
 	<li>Selenium</li>
 	<li>Junit</li>
@@ -46,6 +47,20 @@ The front end colour scheme is dependent on a tasks status with the aviable stat
 </ul>
 
 ![image of frontend](https://github.com/SJKnapp/ProjectOneSupplementary/blob/main/Screenshot%202021-07-29%20at%2019-52-17%20Document.png)
+
+where the first row colour scheme is overdue not marked done
+<br/>the second row has been marked as done
+<br/>the third row is time remaing not marked done
+<br/>the forth row is ready for data entry where clicking 
+the save button will create an entry with the data in that 
+row with the colour scheme of No due date not marked done
+
+The save button for existing rows will update them to the new data.
+<br />The delete button will remove them from the database
+<br />The (not) done will togle the task status between mark as done or not
+
+pressing any button will refress the tasks in the list
+
 
 <h2>2. Backend</h2>
 
