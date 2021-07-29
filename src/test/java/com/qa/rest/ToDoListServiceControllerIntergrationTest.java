@@ -2,6 +2,7 @@ package com.qa.rest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -87,5 +88,21 @@ public class ToDoListServiceControllerIntergrationTest {
 		ResultMatcher response = content().json(this.mapper.writeValueAsString(toDoLists));
 
 		this.mockMvc.perform(delete("/task/1/delete")).andExpect(status().isOk()).andExpect(response);
+	}
+
+	@Test
+	void testPatchStatusTrue() throws Exception {
+		ToDoList toDoLists = new ToDoList(1, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100, true);
+		ResultMatcher response = content().json(this.mapper.writeValueAsString(toDoLists));
+
+		this.mockMvc.perform(patch("/task/1/status/true")).andExpect(status().isOk()).andExpect(response);
+	}
+
+	@Test
+	void testPatchStatusFalse() throws Exception {
+		ToDoList toDoLists = new ToDoList(2, Date.valueOf("2021-08-11"), "two", "a long task", 5, 1000, false);
+		ResultMatcher response = content().json(this.mapper.writeValueAsString(toDoLists));
+
+		this.mockMvc.perform(patch("/task/2/status/false")).andExpect(status().isOk()).andExpect(response);
 	}
 }
