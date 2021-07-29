@@ -43,7 +43,7 @@ public class SeleniumEndToEndTest {
 	}
 
 	@Test
-	void delete() {
+	void TestDeleteButton() {
 		driver.get("http://localhost:" + port + "/");
 		WebElement wait = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
 		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
@@ -55,18 +55,23 @@ public class SeleniumEndToEndTest {
 		assertEquals(startSize, endSize + 1);
 	}
 
-//	@Test
-//	void testers() {
-//		driver.get("http://localhost:" + port + "/");
-//		WebElement wait = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
-//		WebElement w = driver.findElement(By.cssSelector("#renderedTasks > div:nth-child(1) > input:nth-child(1)"));
-//		// wait.findElements(By.cssSelector("div:nthchild"));
-//		w.sendKeys("aaaaa");
-//		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
-//		WebElement r = pageElements.get(0).findElement(By.cssSelector("input:nth-child(1)"));
-//		r.clear();
-//		System.out.println(pageElements);
-//	}
+	@Test
+	void TestGetAll() {
+		driver.get("http://localhost:" + port + "/");
+		WebElement wait = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
+		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
+		assertEquals(3, pageElements.size());
+		List<WebElement> inputValues = pageElements.get(0).findElements(By.cssSelector("input"));
+		assertEquals("one", inputValues.get(0).getAttribute("value"));
+		assertEquals("a short task", inputValues.get(1).getAttribute("value"));
+		assertEquals("1", inputValues.get(2).getAttribute("value"));
+		assertEquals("100", inputValues.get(3).getAttribute("value"));
+		assertEquals("2021-07-12", inputValues.get(4).getAttribute("value"));
+
+		List<WebElement> buttonText = pageElements.get(0).findElements(By.cssSelector("button"));
+		assertEquals("save", buttonText.get(0).getText());
+		assertEquals("delete", buttonText.get(1).getText());
+	}
 
 	@AfterEach
 	void tearDown() {
