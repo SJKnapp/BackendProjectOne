@@ -59,7 +59,7 @@ public class SeleniumEndToEndTest {
 		driver.get("http://localhost:" + port + "/");
 		this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
 		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
-		assertEquals(3, pageElements.size());
+		assertEquals(4, pageElements.size());
 		List<WebElement> inputValues = pageElements.get(0).findElements(By.cssSelector("input"));
 		assertEquals(5, inputValues.size());
 		assertEquals("one", inputValues.get(0).getAttribute("value"));
@@ -139,7 +139,7 @@ public class SeleniumEndToEndTest {
 		this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
 		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
 
-		List<WebElement> inputValues = pageElements.get(1).findElements(By.cssSelector("input"));
+		List<WebElement> inputValues = pageElements.get(2).findElements(By.cssSelector("input"));
 
 		String htmlClass = "inDate";
 
@@ -156,7 +156,7 @@ public class SeleniumEndToEndTest {
 		this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
 		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
 
-		List<WebElement> inputValues = pageElements.get(2).findElements(By.cssSelector("input"));
+		List<WebElement> inputValues = pageElements.get(3).findElements(By.cssSelector("input"));
 
 		String htmlClass = "notSet";
 
