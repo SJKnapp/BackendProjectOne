@@ -2,6 +2,7 @@ package com.qa.rest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -43,8 +44,8 @@ public class ToDoListServiceControllerIntergrationTest {
 	void testGetAll() throws Exception {
 
 		List<ToDoList> toDoLists = new ArrayList<>();
-		toDoLists.add(new ToDoList(1, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100));
-		toDoLists.add(new ToDoList(2, Date.valueOf("2021-08-11"), "two", "a long task", 5, 1000));
+		toDoLists.add(new ToDoList(1, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100, false));
+		toDoLists.add(new ToDoList(2, Date.valueOf("2021-08-11"), "two", "a long task", 5, 1000, true));
 		ResultMatcher body = content().json(this.mapper.writeValueAsString(toDoLists));
 
 		this.mockMvc.perform(get("/getAll")).andExpect(status().isOk()).andExpect(body);
@@ -53,7 +54,7 @@ public class ToDoListServiceControllerIntergrationTest {
 	@Test
 	void testCreateTask() throws Exception {
 		ToDoList request = new ToDoList(Date.valueOf("2021-07-12"), "one", "a short task", 1, 100);
-		ToDoList expected = new ToDoList(3, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100);
+		ToDoList expected = new ToDoList(3, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100, false);
 
 		ResultMatcher body = content().json(this.mapper.writeValueAsString(expected));
 
@@ -63,7 +64,7 @@ public class ToDoListServiceControllerIntergrationTest {
 
 	@Test
 	void testGetTask() throws Exception {
-		ToDoList toDoList = new ToDoList(1, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100);
+		ToDoList toDoList = new ToDoList(1, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100, false);
 		ResultMatcher response = content().json(this.mapper.writeValueAsString(toDoList));
 
 		this.mockMvc.perform(get("/task/1/get")).andExpect(status().isOk()).andExpect(response);
@@ -72,7 +73,7 @@ public class ToDoListServiceControllerIntergrationTest {
 	@Test
 	void testUpdateTask() throws Exception {
 		ToDoList request = new ToDoList(Date.valueOf("2022-6-05"), "three", "a very long task", 15, 1000);
-		ToDoList toDoList = new ToDoList(1, Date.valueOf("2022-6-05"), "three", "a very long task", 15, 1000);
+		ToDoList toDoList = new ToDoList(1, Date.valueOf("2022-6-05"), "three", "a very long task", 15, 1000, false);
 		ResultMatcher response = content().json(this.mapper.writeValueAsString(toDoList));
 
 		this.mockMvc
@@ -83,9 +84,25 @@ public class ToDoListServiceControllerIntergrationTest {
 
 	@Test
 	void testDeleteTask() throws Exception {
-		ToDoList toDoLists = new ToDoList(1, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100);
+		ToDoList toDoLists = new ToDoList(1, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100, false);
 		ResultMatcher response = content().json(this.mapper.writeValueAsString(toDoLists));
 
 		this.mockMvc.perform(delete("/task/1/delete")).andExpect(status().isOk()).andExpect(response);
+	}
+
+	@Test
+	void testPatchStatusTrue() throws Exception {
+		ToDoList toDoLists = new ToDoList(1, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100, true);
+		ResultMatcher response = content().json(this.mapper.writeValueAsString(toDoLists));
+
+		this.mockMvc.perform(patch("/task/1/status/true")).andExpect(status().isOk()).andExpect(response);
+	}
+
+	@Test
+	void testPatchStatusFalse() throws Exception {
+		ToDoList toDoLists = new ToDoList(2, Date.valueOf("2021-08-11"), "two", "a long task", 5, 1000, false);
+		ResultMatcher response = content().json(this.mapper.writeValueAsString(toDoLists));
+
+		this.mockMvc.perform(patch("/task/2/status/false")).andExpect(status().isOk()).andExpect(response);
 	}
 }

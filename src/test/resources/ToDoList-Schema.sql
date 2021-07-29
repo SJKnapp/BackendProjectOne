@@ -5,4 +5,5 @@ create table to_do_list
 	name varchar(255), 
 	priority integer not null, 
 	time_estimate_minutes integer not null, 
+	is_done bit not null,
 	primary key (id))

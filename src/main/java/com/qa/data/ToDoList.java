@@ -19,10 +19,11 @@ public class ToDoList {
 	private String description;
 	private int priority;
 	private int timeEstimateMinutes;
+	private boolean isDone = false;
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, dueDate, id, name, priority, timeEstimateMinutes);
+		return Objects.hash(description, dueDate, id, isDone, name, priority, timeEstimateMinutes);
 	}
 
 	@Override
@@ -35,8 +36,8 @@ public class ToDoList {
 			return false;
 		ToDoList other = (ToDoList) obj;
 		return Objects.equals(description, other.description) && Objects.equals(dueDate, other.dueDate)
-				&& id == other.id && Objects.equals(name, other.name) && priority == other.priority
-				&& timeEstimateMinutes == other.timeEstimateMinutes;
+				&& id == other.id && isDone == other.isDone && Objects.equals(name, other.name)
+				&& priority == other.priority && timeEstimateMinutes == other.timeEstimateMinutes;
 	}
 
 	public ToDoList() {
@@ -52,7 +53,8 @@ public class ToDoList {
 		this.timeEstimateMinutes = timeEstimateMinutes;
 	}
 
-	public ToDoList(int id, Date dueDate, String name, String description, int priority, int timeEstimateMinutes) {
+	public ToDoList(int id, Date dueDate, String name, String description, int priority, int timeEstimateMinutes,
+			boolean isDone) {
 		super();
 		this.id = id;
 		this.dueDate = dueDate;
@@ -60,6 +62,15 @@ public class ToDoList {
 		this.description = description;
 		this.priority = priority;
 		this.timeEstimateMinutes = timeEstimateMinutes;
+		this.isDone = isDone;
+	}
+
+	public boolean isDone() {
+		return isDone;
+	}
+
+	public void setDone(boolean isDone) {
+		this.isDone = isDone;
 	}
 
 	public int getId() {
