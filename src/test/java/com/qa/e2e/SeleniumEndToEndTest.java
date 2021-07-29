@@ -167,6 +167,72 @@ public class SeleniumEndToEndTest {
 		assertEquals(true, inputValues.get(4).getAttribute("class").contains(htmlClass));
 	}
 
+	@Test
+	void TestStatusDoneToNotDone() {
+		driver.get("http://localhost:" + port + "/");
+		this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
+		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
+
+		WebElement testRow = pageElements.get(1);
+
+		List<WebElement> inputValues = testRow.findElements(By.cssSelector("input"));
+		WebElement doneButton = testRow.findElements(By.cssSelector("button")).get(2);
+
+		String htmlClassStart = "done";
+
+		assertEquals(true, inputValues.get(0).getAttribute("class").contains(htmlClassStart));
+		assertEquals(true, inputValues.get(1).getAttribute("class").contains(htmlClassStart));
+		assertEquals(true, inputValues.get(2).getAttribute("class").contains(htmlClassStart));
+		assertEquals(true, inputValues.get(3).getAttribute("class").contains(htmlClassStart));
+		assertEquals(true, inputValues.get(4).getAttribute("class").contains(htmlClassStart));
+
+		doneButton.click();
+		String htmlClassEnd = "inDate";
+
+		pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
+		testRow = pageElements.get(1);
+		inputValues = testRow.findElements(By.cssSelector("input"));
+
+		assertEquals(true, inputValues.get(0).getAttribute("class").contains(htmlClassEnd));
+		assertEquals(true, inputValues.get(1).getAttribute("class").contains(htmlClassEnd));
+		assertEquals(true, inputValues.get(2).getAttribute("class").contains(htmlClassEnd));
+		assertEquals(true, inputValues.get(3).getAttribute("class").contains(htmlClassEnd));
+		assertEquals(true, inputValues.get(4).getAttribute("class").contains(htmlClassEnd));
+	}
+
+	@Test
+	void TestStatusNotDoneToDone() {
+		driver.get("http://localhost:" + port + "/");
+		this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
+		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
+
+		WebElement testRow = pageElements.get(0);
+
+		List<WebElement> inputValues = testRow.findElements(By.cssSelector("input"));
+		WebElement doneButton = testRow.findElements(By.cssSelector("button")).get(2);
+
+		String htmlClassStart = "overdue";
+
+		assertEquals(true, inputValues.get(0).getAttribute("class").contains(htmlClassStart));
+		assertEquals(true, inputValues.get(1).getAttribute("class").contains(htmlClassStart));
+		assertEquals(true, inputValues.get(2).getAttribute("class").contains(htmlClassStart));
+		assertEquals(true, inputValues.get(3).getAttribute("class").contains(htmlClassStart));
+		assertEquals(true, inputValues.get(4).getAttribute("class").contains(htmlClassStart));
+
+		doneButton.click();
+		String htmlClassEnd = "done";
+
+		pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
+		testRow = pageElements.get(0);
+		inputValues = testRow.findElements(By.cssSelector("input"));
+
+		assertEquals(true, inputValues.get(0).getAttribute("class").contains(htmlClassEnd));
+		assertEquals(true, inputValues.get(1).getAttribute("class").contains(htmlClassEnd));
+		assertEquals(true, inputValues.get(2).getAttribute("class").contains(htmlClassEnd));
+		assertEquals(true, inputValues.get(3).getAttribute("class").contains(htmlClassEnd));
+		assertEquals(true, inputValues.get(4).getAttribute("class").contains(htmlClassEnd));
+	}
+
 	@AfterEach
 	void tearDown() {
 		this.driver.close();
