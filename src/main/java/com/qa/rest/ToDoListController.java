@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -51,5 +52,10 @@ public class ToDoListController {
 	@DeleteMapping("/task/{id}/delete")
 	public ResponseEntity<ToDoList> deleteTask(@PathVariable int id) {
 		return new ResponseEntity<>(service.DeleteTask(id), HttpStatus.OK);
+	}
+
+	@PatchMapping("/task/{id}/status/{isDone}")
+	public ResponseEntity<ToDoList> patchStatus(@PathVariable int id, @PathVariable boolean isDone) {
+		return new ResponseEntity<>(service.SetDone(id, isDone), HttpStatus.OK);
 	}
 }
