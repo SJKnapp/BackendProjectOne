@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -48,7 +49,7 @@ public class ToDoListDbUnitTest {
 
 		ToDoList expectedToDoList = new ToDoList(id, date, "task", "long task", 4, 100, false);
 
-		Mockito.when(repo.getById(id)).thenReturn(expectedToDoList);
+		Mockito.when(repo.findById(id)).thenReturn(Optional.of(expectedToDoList));
 
 		assertThat(service.getTask(id)).isEqualTo(expectedToDoList);
 	}
@@ -61,7 +62,7 @@ public class ToDoListDbUnitTest {
 
 		ToDoList expectedToDoList = new ToDoList(id, date, "task", "long task", 4, 100, false);
 
-		Mockito.when(repo.getById(id)).thenReturn(expectedToDoList);
+		Mockito.when(repo.findById(id)).thenReturn(Optional.of(expectedToDoList));
 
 		assertThat(service.getTask(id)).isEqualTo(expectedToDoList);
 	}
@@ -89,7 +90,7 @@ public class ToDoListDbUnitTest {
 		ToDoList requestToDoList = new ToDoList(date, "task", "long task", 4, 100);
 		ToDoList expectedToDoList = new ToDoList(id, date, "task", "long task", 4, 100, false);
 
-		Mockito.when(repo.getById(id)).thenReturn(expectedToDoList);
+		Mockito.when(repo.findById(id)).thenReturn(Optional.of(expectedToDoList));
 
 		assertThat(service.PutTask(id, requestToDoList)).isEqualTo(expectedToDoList);
 	}
@@ -102,7 +103,7 @@ public class ToDoListDbUnitTest {
 
 		ToDoList expectedToDoList = new ToDoList(id, date, "task", "long task", 4, 100, true);
 
-		Mockito.when(repo.getById(id)).thenReturn(expectedToDoList);
+		Mockito.when(repo.findById(id)).thenReturn(Optional.of(expectedToDoList));
 
 		assertThat(service.SetDone(id, true)).isEqualTo(expectedToDoList);
 	}
@@ -115,7 +116,7 @@ public class ToDoListDbUnitTest {
 
 		ToDoList expectedToDoList = new ToDoList(id, date, "task", "long task", 4, 100, false);
 
-		Mockito.when(repo.getById(id)).thenReturn(expectedToDoList);
+		Mockito.when(repo.findById(id)).thenReturn(Optional.of(expectedToDoList));
 
 		assertThat(service.SetDone(id, false)).isEqualTo(expectedToDoList);
 	}

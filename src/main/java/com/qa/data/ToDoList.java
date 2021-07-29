@@ -23,7 +23,7 @@ public class ToDoList {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, dueDate, id, name, priority, timeEstimateMinutes);
+		return Objects.hash(description, dueDate, id, isDone, name, priority, timeEstimateMinutes);
 	}
 
 	@Override
@@ -36,8 +36,8 @@ public class ToDoList {
 			return false;
 		ToDoList other = (ToDoList) obj;
 		return Objects.equals(description, other.description) && Objects.equals(dueDate, other.dueDate)
-				&& id == other.id && Objects.equals(name, other.name) && priority == other.priority
-				&& timeEstimateMinutes == other.timeEstimateMinutes;
+				&& id == other.id && isDone == other.isDone && Objects.equals(name, other.name)
+				&& priority == other.priority && timeEstimateMinutes == other.timeEstimateMinutes;
 	}
 
 	public ToDoList() {
