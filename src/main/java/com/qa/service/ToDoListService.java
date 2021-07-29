@@ -14,4 +14,6 @@ public interface ToDoListService {
 	public ToDoList CreateTask(ToDoList toDoList);
 
 	public ToDoList PutTask(int id, ToDoList toDoList);
+
+	public ToDoList SetDone(int id, boolean isDone);
 }

@@ -41,6 +41,14 @@ public class ToDoListServiceDb implements ToDoListService {
 	}
 
 	@Override
+	public ToDoList SetDone(int id, boolean isDone) {
+		ToDoList object = getTask(id);
+		object.setDone(isDone);
+		ToDoList found = this.repo.save(object);
+		return getTask(id);
+	}
+
+	@Override
 	public ToDoList PutTask(int id, ToDoList toDoList) {
 		ToDoList object = getTask(id);
 		object.setDueDate(toDoList.getDueDate());
