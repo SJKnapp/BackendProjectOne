@@ -35,7 +35,6 @@ public class SeleniumEndToEndTest {
 	public SeleniumEndToEndTest() {
 
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		// maximize window
 		driver.manage().window().maximize();
 
 		this.wait = new WebDriverWait(driver, 5);
@@ -45,7 +44,7 @@ public class SeleniumEndToEndTest {
 	@Test
 	void TestDeleteButton() {
 		driver.get("http://localhost:" + port + "/");
-		WebElement wait = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
+		this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
 		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
 		int startSize = pageElements.size();
 		WebElement deleteButton = pageElements.get(0).findElement(By.cssSelector("button:nth-child(7)"));
@@ -58,7 +57,7 @@ public class SeleniumEndToEndTest {
 	@Test
 	void TestGetAll() {
 		driver.get("http://localhost:" + port + "/");
-		WebElement wait = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
+		this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
 		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
 		assertEquals(3, pageElements.size());
 		List<WebElement> inputValues = pageElements.get(0).findElements(By.cssSelector("input"));
@@ -78,7 +77,7 @@ public class SeleniumEndToEndTest {
 	@Test
 	void TestCreateEntry() {
 		driver.get("http://localhost:" + port + "/");
-		WebElement wait = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
+		this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
 		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
 
 		List<WebElement> inputValues = pageElements.get(2).findElements(By.cssSelector("input"));
@@ -115,6 +114,57 @@ public class SeleniumEndToEndTest {
 		assertEquals(TaskPrioity, storedValues.get(2).getAttribute("value"));
 		assertEquals(TaskLength, storedValues.get(3).getAttribute("value"));
 		assertEquals(TaskDate, storedValues.get(4).getAttribute("value"));
+	}
+
+	@Test
+	void TestOverDue() {
+		driver.get("http://localhost:" + port + "/");
+		this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
+		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
+
+		List<WebElement> inputValues = pageElements.get(0).findElements(By.cssSelector("input"));
+
+		String htmlClass = "overdue";
+
+		assertEquals(true, inputValues.get(0).getAttribute("class").contains(htmlClass));
+		assertEquals(true, inputValues.get(1).getAttribute("class").contains(htmlClass));
+		assertEquals(true, inputValues.get(2).getAttribute("class").contains(htmlClass));
+		assertEquals(true, inputValues.get(3).getAttribute("class").contains(htmlClass));
+		assertEquals(true, inputValues.get(4).getAttribute("class").contains(htmlClass));
+	}
+
+	@Test
+	void TestStillTime() {
+		driver.get("http://localhost:" + port + "/");
+		this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
+		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
+
+		List<WebElement> inputValues = pageElements.get(1).findElements(By.cssSelector("input"));
+
+		String htmlClass = "inDate";
+
+		assertEquals(true, inputValues.get(0).getAttribute("class").contains(htmlClass));
+		assertEquals(true, inputValues.get(1).getAttribute("class").contains(htmlClass));
+		assertEquals(true, inputValues.get(2).getAttribute("class").contains(htmlClass));
+		assertEquals(true, inputValues.get(3).getAttribute("class").contains(htmlClass));
+		assertEquals(true, inputValues.get(4).getAttribute("class").contains(htmlClass));
+	}
+
+	@Test
+	void TestDateNotSet() {
+		driver.get("http://localhost:" + port + "/");
+		this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("renderedTasks")));
+		List<WebElement> pageElements = driver.findElements(By.cssSelector("#renderedTasks > div"));
+
+		List<WebElement> inputValues = pageElements.get(2).findElements(By.cssSelector("input"));
+
+		String htmlClass = "notSet";
+
+		assertEquals(true, inputValues.get(0).getAttribute("class").contains(htmlClass));
+		assertEquals(true, inputValues.get(1).getAttribute("class").contains(htmlClass));
+		assertEquals(true, inputValues.get(2).getAttribute("class").contains(htmlClass));
+		assertEquals(true, inputValues.get(3).getAttribute("class").contains(htmlClass));
+		assertEquals(true, inputValues.get(4).getAttribute("class").contains(htmlClass));
 	}
 
 	@AfterEach
