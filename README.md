@@ -1,7 +1,5 @@
 <h1>CRUD project</h1>
 
-<h2>Contents</h2>
-
 <h2>1. Resoures</h2>
 
 During this project several different technoligoes and resources where used:
@@ -57,9 +55,9 @@ row with the colour scheme of No due date not marked done
 
 The save button for existing rows will update them to the new data.
 <br />The delete button will remove them from the database
-<br />The (not) done will togle the task status between mark as done or not
+<br />The (not) done will toggle the task status between mark as done or not
 
-pressing any button will refress the tasks in the list
+pressing any button will refresh the tasks in the list
 
 
 <h2>2. Backend</h2>
@@ -87,7 +85,7 @@ boolean and id was the data's id in the database:
 
 <ul>
 	<li>/getAll - get - gets all the data from the database</li>
-	<li>/create - post - creates a new data entry at the next avalible point</li>
+	<li>/create - post - creates a new data entry at the next available point</li>
 	<li>/task/{id}/get - get -get the data at a set id</li>
 	<li>/task/{id}/update - put - updates to the new json</li>
 	<li>/task/{id}/delete - delete - deletes the entry at id </li>
@@ -100,6 +98,7 @@ boolean and id was the data's id in the database:
 <h2>4. Testing</h2>
 
 At time of writing all tests passed on project passed
+
 ![image of test results](https://github.com/SJKnapp/ProjectOneSupplementary/blob/main/ProjectOneTestResults.PNG)
  
  
