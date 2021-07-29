@@ -46,6 +46,7 @@ public class ToDoListServiceControllerIntergrationTest {
 		List<ToDoList> toDoLists = new ArrayList<>();
 		toDoLists.add(new ToDoList(1, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100, false));
 		toDoLists.add(new ToDoList(2, Date.valueOf("2021-08-11"), "two", "a long task", 5, 1000, true));
+		toDoLists.add(new ToDoList(3, Date.valueOf("2021-09-11"), "three", "a medium task", 10, 1999, false));
 		ResultMatcher body = content().json(this.mapper.writeValueAsString(toDoLists));
 
 		this.mockMvc.perform(get("/getAll")).andExpect(status().isOk()).andExpect(body);
@@ -54,7 +55,7 @@ public class ToDoListServiceControllerIntergrationTest {
 	@Test
 	void testCreateTask() throws Exception {
 		ToDoList request = new ToDoList(Date.valueOf("2021-07-12"), "one", "a short task", 1, 100);
-		ToDoList expected = new ToDoList(3, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100, false);
+		ToDoList expected = new ToDoList(4, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100, false);
 
 		ResultMatcher body = content().json(this.mapper.writeValueAsString(expected));
 
