@@ -44,7 +44,7 @@ public class ToDoListServiceControllerIntergrationTest {
 
 		List<ToDoList> toDoLists = new ArrayList<>();
 		toDoLists.add(new ToDoList(1, Date.valueOf("2021-07-12"), "one", "a short task", 1, 100, false));
-		toDoLists.add(new ToDoList(2, Date.valueOf("2021-08-11"), "two", "a long task", 5, 1000, false));
+		toDoLists.add(new ToDoList(2, Date.valueOf("2021-08-11"), "two", "a long task", 5, 1000, true));
 		ResultMatcher body = content().json(this.mapper.writeValueAsString(toDoLists));
 
 		this.mockMvc.perform(get("/getAll")).andExpect(status().isOk()).andExpect(body);
